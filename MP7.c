@@ -33,8 +33,8 @@ static void spmvJDS(float *out, int *matColStart, int *matCols,
                     float *vec, int dim) {
 
   //@@ invoke spmv kernel for jds format
-  dim3 dimGrid = (ceil(dim * 1.0 / 1024), 1, 1);
-  dim3 dimBlock = (1024, 1, 1);
+  dim3 dimGrid(ceil(dim / 1024.0), 1, 1);
+  dim3 dimBlock(1024, 1, 1);
   spmvJDSKernel<<<dimGrid, dimBlock>>>(out, matColStart, matCols, matRowPerm, matRows, matData, vec, dim);
 }
 
